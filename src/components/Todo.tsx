@@ -7,10 +7,23 @@ interface Props {
 
 const Todo: React.FC<Props> = ({ todo }) => {
 	return (
-		<div className="todo">
-			<h2 className="title">{todo.title}</h2>
-			<input type="checkbox" checked={todo.completed} />
-		</div>
+		<tr className="fw-normal">
+			<th>
+				<span className="ms-2">{todo.userId}</span>
+			</th>
+			<td className="align-middle">{todo.title}</td>
+			<td className="align-middle">
+				<input type="checkbox" className="todo-checkbox" checked={todo.completed} />
+			</td>
+			<td className="align-middle">
+				<a href="#!" data-mdb-toggle="tooltip" title="Done">
+					<i className="bi bi-pencil todo-action"></i>
+				</a>
+				<a href="#!" data-mdb-toggle="tooltip" title="Remove">
+					<i className="bi bi-trash todo-action"></i>
+				</a>
+			</td>
+		</tr>
 	);
 };
 

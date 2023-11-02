@@ -1,38 +1,29 @@
-.App {
-  text-align: center;
+#list1 .form-control {
+	border-color: transparent;
+}
+#list1 .form-control:focus {
+	border-color: transparent;
+	box-shadow: none;
+}
+#list1 .select-input.form-control[readonly]:not([disabled]) {
+	background-color: #fbfbfb;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.todo-card-border {
+	border-radius: 0;
+	background-color: #eff1f2;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.todo-link {
+	color: #23af89;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.todo-checkbox {
+	width: 1.4em;
+	height: 1.4em;
+	margin: 0 auto;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.todo-action {
+	font-size: 1.4em;
+	margin-right: 0.2em;
 }
