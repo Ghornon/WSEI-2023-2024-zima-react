@@ -6,7 +6,7 @@ import 'bootswatch/dist/lux/bootstrap.min.css';
 
 import './index.css';
 
-import App from './App';
+import App from './pages/Todo/Todo';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);

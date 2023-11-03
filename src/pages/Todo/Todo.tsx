@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import './App.css';
-import Loader from './components/Loader';
-import Todo from './components/Todo';
-import { TodoType } from './types/Todo.types';
+import './Todo.css';
+import Loader from '../../components/Loader';
+import Todo from '../../components/Todo';
+import { TodoType } from '../../types/Todo.types';
 
 function App() {
 	const [todos, setTodos] = useState([] as TodoType[]);
@@ -71,7 +71,7 @@ function App() {
 							<div className="card todo-card-border" id="list1">
 								<div className="card-body py-4 px-4 px-md-5">
 									<p className="h1 text-center mt-3 mb-4 pb-3 text-primary">
-										<i className="fas fa-check-square me-1"></i>
+										<i className="bi bi-card-checklist"></i>
 										My Todo-s
 									</p>
 
@@ -81,7 +81,7 @@ function App() {
 												<div className="d-flex flex-row align-items-center">
 													<input
 														type="text"
-														className="form-control form-control-lg"
+														className="form-control me-sm-3"
 														id="exampleFormControlInput1"
 														placeholder="Add new..."
 														value={newTodoTitle}
@@ -89,22 +89,13 @@ function App() {
 															setNewTodoTitle(event.target.value);
 														}}
 													/>
-													<a
-														href="#!"
-														data-mdb-toggle="tooltip"
-														title="Set due date"
+													<button
+														type="button"
+														className="btn btn-primary my-3 my-sm-0"
+														onClick={createNewTodo}
 													>
-														<i className="fas fa-calendar-alt fa-lg me-3"></i>
-													</a>
-													<div>
-														<button
-															type="button"
-															className="btn btn-primary"
-															onClick={createNewTodo}
-														>
-															Add
-														</button>
-													</div>
+														Add
+													</button>
 												</div>
 											</div>
 										</div>
@@ -115,7 +106,7 @@ function App() {
 									<div className="d-flex justify-content-end align-items-center mb-4 pt-2 pb-3">
 										<p className="small mb-0 me-2 text-muted">Filter</p>
 										<select
-											className="select"
+											className="form-select"
 											value={filter}
 											onChange={handleFilerOnChange}
 										>
