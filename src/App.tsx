@@ -5,20 +5,61 @@ import Todo from './components/Todo';
 import { TodoType } from './types/Todo.types';
 
 function App() {
-	const [todos, setTodos] = useState([]);
+	const [todos, setTodos] = useState([] as TodoType[]);
 	const [filter, setFilter] = useState('All');
-	const [error, setError] = useState({});
+	const [newTodoTitle, setNewTodoTitle] = useState('');
 
-	const handleFilerOnChange = (event) => {
+	const handleFilerOnChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
 		console.log(event.target.value);
 		setFilter(event.target.value);
+	};
+
+	const handleTaskStatusChange = (id: number) => {
+		const updatedTodos = todos.map((todo: TodoType) => {
+			if (todo.id == id) todo.completed = !todo.completed;
+
+			return todo;
+		});
+
+		setTodos(updatedTodos);
+	};
+
+	const handleTaskDelete = (id: number) => {
+		const updatedTodos = todos.filter((todo: TodoType) => {
+			if (todo.id != id) return todo;
+		});
+
+		setTodos(updatedTodos);
+	};
+
+	const createNewTodo = async () => {
+		const updatedTodos = [...todos];
+
+		const newTodo = {
+			title: newTodoTitle,
+			completed: false,
+			userId: 1,
+		};
+
+		const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
+			method: 'POST', // or 'PUT'
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(newTodo),
+		});
+
+		const result = await response.json();
+
+		updatedTodos.push(result);
+
+		setTodos(updatedTodos);
 	};
 
 	useEffect(() => {
 		fetch('https://jsonplaceholder.typicode.com/todos')
 			.then((response) => response.json())
-			.then((res) => setTodos(res))
-			.catch((err) => setError(err));
+			.then((res) => setTodos(res));
 	}, []);
 
 	return (
@@ -43,6 +84,10 @@ function App() {
 														className="form-control form-control-lg"
 														id="exampleFormControlInput1"
 														placeholder="Add new..."
+														value={newTodoTitle}
+														onChange={(event) => {
+															setNewTodoTitle(event.target.value);
+														}}
 													/>
 													<a
 														href="#!"
@@ -55,6 +100,7 @@ function App() {
 														<button
 															type="button"
 															className="btn btn-primary"
+															onClick={createNewTodo}
 														>
 															Add
 														</button>
@@ -112,7 +158,16 @@ function App() {
 														)
 															return todo;
 													})
-													.map((todo: TodoType) => <Todo todo={todo} />)
+													.map((todo: TodoType) => (
+														<Todo
+															key={todo.id}
+															todo={todo}
+															handleTaskStatusChange={
+																handleTaskStatusChange
+															}
+															handleTaskDelete={handleTaskDelete}
+														/>
+													))
 											) : (
 												<Loader />
 											)}
