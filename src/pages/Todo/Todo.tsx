@@ -4,7 +4,7 @@ import Loader from '../../components/Loader';
 import Todo from '../../components/Todo';
 import { TodoType } from '../../types/Todo.types';
 
-function App() {
+function TodoPage() {
 	const [todos, setTodos] = useState([] as TodoType[]);
 	const [filter, setFilter] = useState('All');
 	const [newTodoTitle, setNewTodoTitle] = useState('');
@@ -44,7 +44,7 @@ function App() {
 		const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
 			method: 'POST', // or 'PUT'
 			headers: {
-				'Content-Type': 'application/json',
+				'Content-Type': 'TodoPagelication/json',
 			},
 			body: JSON.stringify(newTodo),
 		});
@@ -63,7 +63,7 @@ function App() {
 	}, []);
 
 	return (
-		<div className="App">
+		<div className="TodoPage">
 			<section className="vh-100">
 				<div className="container py-5 h-100">
 					<div className="row d-flex justify-content-center align-items-center h-100">
@@ -174,4 +174,4 @@ function App() {
 	);
 }
 
-export default App;
+export default TodoPage;
