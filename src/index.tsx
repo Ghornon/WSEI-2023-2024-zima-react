@@ -9,11 +9,13 @@ import './index.css';
 
 import TodoPage from './pages/Todo/Todo';
 import UsersPage from './pages/Users/Users';
+import Nav from './components/Nav';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
 	<BrowserRouter>
+		<Nav />
 		<Routes>
 			<Route path="/">
 				<Route index element={<TodoPage />} />
