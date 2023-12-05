@@ -10,9 +10,9 @@ interface Props {
 const Todo: React.FC<Props> = ({ todo, handleTaskStatusChange, handleTaskDelete }) => {
 	return (
 		<tr className="fw-normal">
-			<th>
+			{/* <th>
 				<span className="ms-2">{todo.userId}</span>
-			</th>
+			</th> */}
 			<td className="align-middle">{todo.title}</td>
 			<td className="align-middle">
 				<input

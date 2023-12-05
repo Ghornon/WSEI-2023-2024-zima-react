@@ -23,7 +23,11 @@ const Nav = () => {
 						<li className="nav-item">
 							<a className="nav-link active" href="/">
 								Home
-								<span className="visually-hidden">(current)</span>
+							</a>
+						</li>
+						<li className="nav-item">
+							<a className="nav-link" href="/todos">
+								Todos
 							</a>
 						</li>
 						<li className="nav-item">
