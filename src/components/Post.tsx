@@ -19,29 +19,59 @@ const Post: React.FC<Props> = ({ post }) => {
 	}, []);
 
 	return (
-		<div className="card mb-3">
-			<div className="card-body text-white bg-dark pt-5 pb-5">
-				<h4 className="card-title">{post.title}</h4>
-				<p className="card-text">{post.body}</p>
-			</div>
-			<ul className="list-group list-group-flush p-4">
-				{comments.length > 0 ? (
-					comments.map((comment: CommentType, index) => {
-						if (!postId && index >= 1) return;
+		<div className={postId ? 'col' : 'col-xs-12 col-sm-6 col-lg-4'}>
+			<div className="card mb-3">
+				<div className="card-body text-white bg-dark pt-3 pb-3">
+					<h3 className="card-title">{post.title}</h3>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						className="d-block user-select-none post-image"
+						width="100%"
+						height="200"
+						aria-label="Placeholder: Image cap"
+						focusable="false"
+						role="img"
+						preserveAspectRatio="xMidYMid slice"
+						viewBox="0 0 318 180"
+					>
+						<rect width="100%" height="100%" fill="#868e96"></rect>
+						<text x="50%" y="50%" fill="#dee2e6" dy=".3em">
+							Image cap
+						</text>
+					</svg>
+					<p className="card-text">{post.body}</p>
+					<div className="row">
+						<div className="col">
+							<span className="badge rounded-pill bg-secondary">
+								Posted: {new Date().toDateString()}
+							</span>
+						</div>
+						<div className="col d-flex justify-content-end">
+							<span className="badge bg-info">tag1</span>
+							<span className="badge bg-success">tag2</span>
+							<span className="badge bg-danger">tag3</span>
+						</div>
+					</div>
+				</div>
+				<ul className="list-group list-group-flush p-4">
+					{comments.length > 0 ? (
+						comments.map((comment: CommentType, index) => {
+							if (!postId && index >= 1) return;
 
-						return <Comment key={comment.id} comment={comment} />;
-					})
-				) : (
-					<Loader />
-				)}
-			</ul>
-			<div className="card-footer text-muted">
-				<a href={`/users/${post.userId}`} className="card-link">
-					UserPage
-				</a>
-				<a href={`/posts/${post.id}`} className="card-link">
-					Comments
-				</a>
+							return <Comment key={comment.id} comment={comment} />;
+						})
+					) : (
+						<Loader />
+					)}
+				</ul>
+				<div className="card-footer text-muted">
+					<a href={`/users/${post.userId}`} className="card-link btn btn-outline-primary">
+						Author Page
+					</a>
+					<a href={`/posts/${post.id}`} className="card-link btn btn-outline-secondary">
+						Comments
+					</a>
+				</div>
 			</div>
 		</div>
 	);

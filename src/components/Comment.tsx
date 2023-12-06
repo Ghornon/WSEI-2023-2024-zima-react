@@ -7,9 +7,11 @@ interface Props {
 const Comment: React.FC<Props> = ({ comment }) => {
 	return (
 		<li className="list-group-item">
-			<h5 className="card-subtitle mt-2 text-muted">{comment.name}</h5>
+			<h6 className="card-subtitle mt-2 text-muted">{comment.name}</h6>
 			<p className="card-text">{comment.body}</p>
-			<h6 className="card-text text-muted">Author: {comment.email}</h6>
+			<p className="card-text text-muted">
+				<small>Author: {comment.email}</small>
+			</p>
 		</li>
 	);
 };
