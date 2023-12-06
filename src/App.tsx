@@ -13,6 +13,7 @@ function App() {
 					<Route index element={<PostsPage />} />
 					<Route path="todos" element={<TodoPage />} />
 					<Route path="users" element={<UsersPage />} />
+					<Route path="/posts/:postId" element={<PostsPage />} />
 					<Route path="posts" element={<PostsPage />} />
 					{/* <Route path="*" element={<NoPage />} /> */}
 				</Route>

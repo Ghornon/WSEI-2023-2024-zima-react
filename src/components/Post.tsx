@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { PostType } from '../types/Post.types';
 import Loader from './Loader';
 import { CommentType } from '../types/Comment.types';
@@ -9,6 +10,7 @@ interface Props {
 
 const Post: React.FC<Props> = ({ post }) => {
 	const [comments, setComments] = useState([] as CommentType[]);
+	const { postId } = useParams();
 
 	useEffect(() => {
 		fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
@@ -24,9 +26,11 @@ const Post: React.FC<Props> = ({ post }) => {
 			</div>
 			<ul className="list-group list-group-flush p-4">
 				{comments.length > 0 ? (
-					comments.map((comment: CommentType) => (
-						<Comment key={comment.id} comment={comment} />
-					))
+					comments.map((comment: CommentType, index) => {
+						if (!postId && index >= 1) return;
+
+						return <Comment key={comment.id} comment={comment} />;
+					})
 				) : (
 					<Loader />
 				)}
@@ -35,7 +39,7 @@ const Post: React.FC<Props> = ({ post }) => {
 				<a href={`/users/${post.userId}`} className="card-link">
 					UserPage
 				</a>
-				<a href={`/posts/${post.id}/comments`} className="card-link">
+				<a href={`/posts/${post.id}`} className="card-link">
 					Comments
 				</a>
 			</div>
