@@ -127,7 +127,7 @@ function TodoPage() {
 									<table className="table mb-0">
 										<thead>
 											<tr>
-												{/* <th scope="col">Team Member</th> */}
+												<th scope="col">Team Member</th>
 												<th scope="col">Task</th>
 												<th scope="col">Is done?</th>
 												<th scope="col">Actions</th>

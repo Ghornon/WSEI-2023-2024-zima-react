@@ -1,14 +1,8 @@
-import { useState, useEffect } from 'react';
-import { UserType } from '../../types/User.types';
+import { useContext } from 'react';
+import { Context } from '../../Store';
 
 function UsersPage() {
-	const [users, setUsers] = useState([] as UserType[]);
-
-	useEffect(() => {
-		fetch('https://jsonplaceholder.typicode.com/users')
-			.then((response) => response.json())
-			.then((res) => setUsers(res));
-	}, []);
+	const users = useContext(Context);
 
 	return (
 		<div className="UsersPage">

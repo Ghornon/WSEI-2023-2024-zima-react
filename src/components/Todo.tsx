@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { TodoType } from '../types/Todo.types';
+import { Context } from '../Store';
 
 interface Props {
 	todo: TodoType;
@@ -8,11 +9,13 @@ interface Props {
 }
 
 const Todo: React.FC<Props> = ({ todo, handleTaskStatusChange, handleTaskDelete }) => {
+	const users = useContext(Context);
+
 	return (
 		<tr className="fw-normal">
-			{/* <th>
-				<span className="ms-2">{todo.userId}</span>
-			</th> */}
+			<th>
+				<span className="ms-2">{users.find((user) => user.id == todo.userId)?.name}</span>
+			</th>
 			<td className="align-middle">{todo.title}</td>
 			<td className="align-middle">
 				<input
