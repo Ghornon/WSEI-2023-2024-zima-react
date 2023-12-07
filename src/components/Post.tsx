@@ -10,7 +10,7 @@ interface Props {
 
 const Post: React.FC<Props> = ({ post }) => {
 	const [comments, setComments] = useState([] as CommentType[]);
-	const { postId } = useParams();
+	const { postId, userId } = useParams();
 
 	useEffect(() => {
 		fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
@@ -19,7 +19,7 @@ const Post: React.FC<Props> = ({ post }) => {
 	}, []);
 
 	return (
-		<div className={postId ? 'col' : 'col-xs-12 col-sm-6 col-lg-4'}>
+		<div className={postId || userId ? 'col' : 'col-xs-12 col-sm-6 col-lg-4'}>
 			<div className="card mb-3">
 				<div className="card-body text-white bg-dark pt-3 pb-3">
 					<h3 className="card-title">{post.title}</h3>
