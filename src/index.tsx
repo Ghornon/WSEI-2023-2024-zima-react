@@ -12,7 +12,9 @@ import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(<App />);
 
-console.warn('I hate my life');
+const purposeOfLife = ['my life', 'react', 'typescript', 'everyone'];
+
+console.warn(`I hate ${purposeOfLife[Math.floor(Math.random() * 4)]}`);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
