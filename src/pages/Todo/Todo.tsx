@@ -1,17 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import './Todo.css';
 import Loader from '../../components/Loader';
 import Todo from '../../components/Todo';
 import { TodoType } from '../../types/Todo.types';
+import { Context } from '../../Store';
 
 function TodoPage() {
 	const [todos, setTodos] = useState([] as TodoType[]);
 	const [filter, setFilter] = useState('All');
+	const [user, setUser] = useState('');
 	const [newTodoTitle, setNewTodoTitle] = useState('');
 
-	const handleFilerOnChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
-		console.log(event.target.value);
+	const users = useContext(Context);
+
+	const handleFilterOnChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
 		setFilter(event.target.value);
+	};
+
+	const handleUserOnChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
+		setUser(event.target.value);
 	};
 
 	const handleTaskStatusChange = (id: number) => {
@@ -38,7 +45,7 @@ function TodoPage() {
 		const newTodo = {
 			title: newTodoTitle,
 			completed: false,
-			userId: 1,
+			userId: user,
 		};
 
 		const response = await fetch('https://jsonplaceholder.typicode.com/todos', {
@@ -97,6 +104,24 @@ function TodoPage() {
 														Add
 													</button>
 												</div>
+												<div className="d-flex flex-row align-items-center pt-2">
+													<select
+														className="form-select"
+														value={user}
+														onChange={handleUserOnChange}
+													>
+														{users.length
+															? users.map((user) => (
+																	<option
+																		key={user.id}
+																		value={user.id}
+																	>
+																		{user.name}
+																	</option>
+															  ))
+															: ''}
+													</select>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -108,7 +133,7 @@ function TodoPage() {
 										<select
 											className="form-select"
 											value={filter}
-											onChange={handleFilerOnChange}
+											onChange={handleFilterOnChange}
 										>
 											<option value="All">All</option>
 											<option value="Completed">Completed</option>
