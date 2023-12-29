@@ -28,7 +28,7 @@ const Post: React.FC<Props> = ({ post }) => {
 						className="d-block user-select-none post-image"
 						width="100%"
 						height="200"
-						aria-label="Placeholder: Image cap"
+						aria-label="Placeholder: Poster"
 						focusable="false"
 						role="img"
 						preserveAspectRatio="xMidYMid slice"
@@ -36,7 +36,7 @@ const Post: React.FC<Props> = ({ post }) => {
 					>
 						<rect width="100%" height="100%" fill="#868e96"></rect>
 						<text x="50%" y="50%" fill="#dee2e6" dy=".3em">
-							Image cap
+							Poster
 						</text>
 					</svg>
 					<p className="card-text">{post.body}</p>
