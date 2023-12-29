@@ -7,6 +7,8 @@ import { UserDataCard } from '../../components/UserDataCard';
 import { UserLinksCard } from '../../components/UserLinksCard';
 import { PostType } from '../../types/Post.types';
 import Post from '../../components/Post';
+import { AlbumType } from '../../types/Album.types';
+import Album from '../../components/Album';
 
 function UserProfile() {
 	const users = useContext(Context);
@@ -15,15 +17,28 @@ function UserProfile() {
 	const currentUser = users.find((user) => user.id.toString() == userId);
 
 	const [posts, setPosts] = useState([] as PostType[]);
-	const URL = `https://jsonplaceholder.typicode.com/users/${userId}/posts`;
+	const PostsURL = `https://jsonplaceholder.typicode.com/users/${userId}/posts`;
+
+	const [albums, setAlbums] = useState([] as PostType[]);
+	const AlbumsURL = `https://jsonplaceholder.typicode.com/users/${userId}/albums`;
 
 	useEffect(() => {
-		fetch(URL)
+		fetch(PostsURL)
 			.then((response) => response.json())
 			.then((res) => {
 				console.log(res);
 				if (Array.isArray(res)) setPosts(res);
 				else setPosts([res]);
+			});
+	}, []);
+
+	useEffect(() => {
+		fetch(AlbumsURL)
+			.then((response) => response.json())
+			.then((res) => {
+				console.log(res);
+				if (Array.isArray(res)) setAlbums(res);
+				else setAlbums([res]);
 			});
 	}, []);
 
@@ -67,6 +82,17 @@ function UserProfile() {
 						) : (
 							<Loader />
 						)}
+
+						<hr />
+						<div className="list-group">
+							{albums.length > 0 ? (
+								albums.map((album: AlbumType) => (
+									<Album key={album.id} album={album} />
+								))
+							) : (
+								<Loader />
+							)}
+						</div>
 
 						<hr />
 
