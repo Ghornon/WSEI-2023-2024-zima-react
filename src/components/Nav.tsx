@@ -35,6 +35,11 @@ const Nav = () => {
 								Users
 							</a>
 						</li>
+						<li className="nav-item">
+							<a className="nav-link" href="/albums">
+								Albums
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>

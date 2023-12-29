@@ -5,6 +5,8 @@ import PostsPage from './pages/Posts/Posts';
 import Nav from './components/Nav';
 import Store from './Store';
 import UserProfile from './pages/UserProfile/UserProfile';
+import AlbumPage from './pages/Album/AlbumPage';
+import PhotosPage from './pages/Photos/PhotosPage';
 
 function App() {
 	return (
@@ -19,6 +21,9 @@ function App() {
 						<Route path="/users/:userId" element={<UserProfile />} />
 						<Route path="posts" element={<PostsPage />} />
 						<Route path="/posts/:postId" element={<PostsPage />} />
+						<Route path="albums" element={<AlbumPage />} />
+						<Route path="/albums/:albumId" element={<AlbumPage />} />
+						<Route path="/albums/:albumId/photos" element={<PhotosPage />} />
 						{/* <Route path="*" element={<NoPage />} /> */}
 					</Route>
 				</Routes>
