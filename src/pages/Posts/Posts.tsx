@@ -21,7 +21,7 @@ function PostsPage() {
 
 	return (
 		<section className="vh-100">
-			<div className={postId ? 'container py-5 h-100' : 'container-fluid py-5 h-100'}>
+			<div className={postId ? 'container py-5 h-100' : 'container-fluid p-5 h-100'}>
 				<div className="row d-flex h-100">
 					{posts.length > 0 ? (
 						posts.map((post: PostType) => <Post key={post.id} post={post} />)

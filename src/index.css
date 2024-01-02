@@ -15,3 +15,8 @@ code {
 	font-size: 1.125rem;
 	text-anchor: middle;
 }
+
+.bg-custom {
+	border-radius: 0;
+	background-color: #eff1f2;
+}

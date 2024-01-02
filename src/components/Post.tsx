@@ -21,7 +21,7 @@ const Post: React.FC<Props> = ({ post }) => {
 	return (
 		<div className={postId || userId ? 'col' : 'col-xs-12 col-sm-6 col-lg-4'}>
 			<div className="card mb-3">
-				<div className="card-body text-white bg-dark pt-3 pb-3">
+				<div className="card-body bg-custom pt-3 pb-3">
 					<h3 className="card-title">{post.title}</h3>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +39,7 @@ const Post: React.FC<Props> = ({ post }) => {
 							Poster
 						</text>
 					</svg>
-					<p className="card-text">{post.body}</p>
+					<p className="card-text pt-2">{post.body}</p>
 					<div className="row">
 						<div className="col">
 							<span className="badge rounded-pill bg-secondary">

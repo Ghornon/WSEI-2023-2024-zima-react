@@ -75,7 +75,7 @@ function TodoPage() {
 				<div className="container py-5 h-100">
 					<div className="row d-flex justify-content-center align-items-center h-100">
 						<div className="col">
-							<div className="card todo-card-border" id="list1">
+							<div className="card bg-custom" id="list1">
 								<div className="card-body py-4 px-4 px-md-5">
 									<p className="h1 text-center mt-3 mb-4 pb-3 text-primary">
 										<i className="bi bi-card-checklist"></i>
