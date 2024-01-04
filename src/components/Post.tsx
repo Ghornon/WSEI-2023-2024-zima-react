@@ -13,9 +13,23 @@ const Post: React.FC<Props> = ({ post }) => {
 	const { postId, userId } = useParams();
 
 	useEffect(() => {
-		fetch(`https://jsonplaceholder.typicode.com/posts/${post.id}/comments`)
-			.then((response) => response.json())
-			.then((res) => setComments(res));
+		const cache = localStorage.getItem('comments');
+		if (cache === null) {
+			fetch('https://jsonplaceholder.typicode.com/comments')
+				.then((response) => response.json())
+				.then((res) => {
+					localStorage.setItem('comments', JSON.stringify(res));
+					const comments = res.filter(
+						(comment: CommentType) => comment.postId == post.id
+					);
+					setComments(comments);
+				});
+		} else {
+			const comments = JSON.parse(cache).filter(
+				(comment: CommentType) => comment.postId == post.id
+			);
+			setComments(comments);
+		}
 	}, []);
 
 	return (
@@ -68,9 +82,68 @@ const Post: React.FC<Props> = ({ post }) => {
 					<a href={`/users/${post.userId}`} className="card-link btn btn-outline-primary">
 						Author Page
 					</a>
-					<a href={`/posts/${post.id}`} className="card-link btn btn-outline-secondary">
-						Comments
-					</a>
+					{postId || userId ? (
+						<button
+							className="card-link btn btn-outline-secondary"
+							type="button"
+							data-bs-toggle="modal"
+							data-bs-target="#addComment"
+						>
+							Add comment
+						</button>
+					) : (
+						<a
+							href={`/posts/${post.id}`}
+							className="card-link btn btn-outline-secondary"
+						>
+							Comments
+						</a>
+					)}
+				</div>
+			</div>
+			<div className="modal fade" id="addComment" aria-hidden="true">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+							<h5 className="modal-title">Add comment</h5>
+							<button
+								type="button"
+								className="btn-close"
+								data-bs-dismiss="modal"
+								aria-label="Close"
+							></button>
+						</div>
+						<div className="modal-body">
+							<div className="form-group">
+								<label>Title</label>
+								<input type="text" className="form-control" />
+							</div>
+							<div className="form-group">
+								<label>Comment</label>
+								<textarea className="form-control" rows={3}></textarea>
+							</div>
+							<div className="form-group">
+								<label>Email address</label>
+								<input
+									type="email"
+									className="form-control"
+									placeholder="name@example.com"
+								/>
+							</div>
+						</div>
+						<div className="modal-footer">
+							<button
+								type="button"
+								className="btn btn-secondary"
+								data-bs-dismiss="modal"
+							>
+								Close
+							</button>
+							<button type="button" className="btn btn-primary">
+								Save changes
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

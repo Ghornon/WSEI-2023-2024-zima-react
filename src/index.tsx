@@ -12,7 +12,7 @@ import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(<App />);
 
-const purposeOfLife = ['my life', 'react', 'typescript', 'everyone'];
+const purposeOfLife = ['my life', 'react', 'typescript', 'everyone', 'the front-end I swear'];
 
 console.warn(`I hate ${purposeOfLife[Math.floor(Math.random() * 4)]}`);
 

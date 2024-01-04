@@ -7,16 +7,32 @@ import Loader from '../../components/Loader';
 function PostsPage() {
 	const [posts, setPosts] = useState([] as PostType[]);
 	const { postId } = useParams();
-	const URL = `https://jsonplaceholder.typicode.com/posts${postId ? '/' + postId : ''}`;
 
 	useEffect(() => {
-		fetch(URL)
-			.then((response) => response.json())
-			.then((res) => {
-				console.log(res);
-				if (Array.isArray(res)) setPosts(res);
-				else setPosts([res]);
-			});
+		const cache = localStorage.getItem('posts');
+		if (cache === null) {
+			fetch('https://jsonplaceholder.typicode.com/posts')
+				.then((response) => response.json())
+				.then((res) => {
+					localStorage.setItem('posts', JSON.stringify(res));
+
+					if (postId) {
+						const post = res.find((post: PostType) => post.id.toString() == postId);
+						setPosts([post]);
+					} else {
+						setPosts(res);
+					}
+				});
+		} else {
+			if (postId) {
+				const post = JSON.parse(cache).find(
+					(post: PostType) => post.id.toString() == postId
+				);
+				setPosts([post]);
+			} else {
+				setPosts(JSON.parse(cache));
+			}
+		}
 	}, []);
 
 	return (
