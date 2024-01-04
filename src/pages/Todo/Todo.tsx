@@ -29,6 +29,7 @@ function TodoPage() {
 		});
 
 		setTodos(updatedTodos);
+		localStorage.setItem('todos', JSON.stringify(updatedTodos));
 	};
 
 	const handleTaskDelete = (id: number) => {
@@ -37,6 +38,7 @@ function TodoPage() {
 		});
 
 		setTodos(updatedTodos);
+		localStorage.setItem('todos', JSON.stringify(updatedTodos));
 	};
 
 	const createNewTodo = async () => {
@@ -57,16 +59,24 @@ function TodoPage() {
 		});
 
 		const result = await response.json();
-
 		updatedTodos.push(result);
 
 		setTodos(updatedTodos);
+		localStorage.setItem('todos', JSON.stringify(updatedTodos));
 	};
 
 	useEffect(() => {
-		fetch('https://jsonplaceholder.typicode.com/todos')
-			.then((response) => response.json())
-			.then((res) => setTodos(res));
+		const cache = localStorage.getItem('todos');
+		if (cache === null) {
+			fetch('https://jsonplaceholder.typicode.com/todos')
+				.then((response) => response.json())
+				.then((res) => {
+					localStorage.setItem('todos', JSON.stringify(res));
+					setTodos(res);
+				});
+		} else {
+			setTodos(JSON.parse(cache));
+		}
 	}, []);
 
 	return (
