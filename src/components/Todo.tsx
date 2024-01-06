@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Todo: React.FC<Props> = ({ todo, handleTaskStatusChange, handleTaskDelete }) => {
-	const users = useContext(Context);
+	const { users } = useContext(Context);
 
 	return (
 		<tr className="fw-normal">

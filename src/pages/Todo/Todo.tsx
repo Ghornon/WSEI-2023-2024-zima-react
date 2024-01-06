@@ -11,7 +11,7 @@ function TodoPage() {
 	const [user, setUser] = useState('');
 	const [newTodoTitle, setNewTodoTitle] = useState('');
 
-	const users = useContext(Context);
+	const { users } = useContext(Context);
 
 	const handleFilterOnChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
 		setFilter(event.target.value);

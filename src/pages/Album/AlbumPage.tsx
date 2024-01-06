@@ -17,7 +17,7 @@ function AlbumPage() {
 				if (Array.isArray(res)) setAlbums(res);
 				else setAlbums([res]);
 			});
-	}, []);
+	});
 
 	return (
 		<section className="vh-100">

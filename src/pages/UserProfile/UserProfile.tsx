@@ -11,7 +11,7 @@ import { AlbumType } from '../../types/Album.types';
 import Album from '../../components/Album';
 
 function UserProfile() {
-	const users = useContext(Context);
+	const { users } = useContext(Context);
 	const { userId } = useParams();
 
 	const currentUser = users.find((user) => user.id.toString() == userId);

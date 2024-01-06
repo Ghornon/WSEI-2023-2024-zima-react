@@ -4,7 +4,7 @@ import { UserCard } from '../../components/UserCard';
 import Loader from '../../components/Loader';
 
 function UsersPage() {
-	const users = useContext(Context);
+	const { users } = useContext(Context);
 
 	const [filter, setFilter] = useState('');
 

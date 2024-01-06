@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Context } from '../Store';
 
 const Nav = () => {
+	const { isAdmin, handleAdminMode } = useContext(Context);
+
 	return (
 		<nav className="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
 			<div className="container-fluid">
@@ -42,6 +45,13 @@ const Nav = () => {
 						</li>
 					</ul>
 				</div>
+				<button
+					type="button"
+					className={isAdmin ? 'btn btn-outline-danger' : 'btn btn-outline-light'}
+					onClick={handleAdminMode}
+				>
+					{isAdmin ? 'Disable admin mode' : 'Enable admin mode'}
+				</button>
 			</div>
 		</nav>
 	);
