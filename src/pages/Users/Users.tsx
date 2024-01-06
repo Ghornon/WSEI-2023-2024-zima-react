@@ -19,7 +19,7 @@ function UsersPage() {
 					<nav aria-label="breadcrumb" className="bg-light rounded-3 p-3 mb-4">
 						<ol className="breadcrumb">
 							<li className="breadcrumb-item">
-								<a href="/home">Home</a>
+								<a href="/">Home</a>
 							</li>
 							<li className="breadcrumb-item active" aria-current="page">
 								Users
