@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { PostType } from '../types/Post.types';
 import Loader from './Loader';
 import { CommentType } from '../types/Comment.types';
 import Comment from '../components/Comment';
+import { Context } from '../Store';
 interface Props {
 	post: PostType;
 }
@@ -11,6 +12,7 @@ interface Props {
 const Post: React.FC<Props> = ({ post }) => {
 	const [comments, setComments] = useState([] as CommentType[]);
 	const { postId, userId } = useParams();
+	const { isAdmin } = useContext(Context);
 
 	const [formData, setFormData] = useState({
 		name: '',
@@ -131,6 +133,16 @@ const Post: React.FC<Props> = ({ post }) => {
 						>
 							Comments
 						</a>
+					)}
+					{isAdmin ? (
+						<a
+							href={`/posts/${post.id}/edit`}
+							className="card-link btn btn-outline-info"
+						>
+							Edit
+						</a>
+					) : (
+						''
 					)}
 				</div>
 			</div>

@@ -11,7 +11,7 @@ function TodoPage() {
 	const [user, setUser] = useState('');
 	const [newTodoTitle, setNewTodoTitle] = useState('');
 
-	const { users } = useContext(Context);
+	const { users, isAdmin } = useContext(Context);
 
 	const handleFilterOnChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
 		setFilter(event.target.value);
@@ -165,7 +165,7 @@ function TodoPage() {
 												<th scope="col">Team Member</th>
 												<th scope="col">Task</th>
 												<th scope="col">Is done?</th>
-												<th scope="col">Actions</th>
+												{isAdmin ? <th scope="col">Actions</th> : ''}
 											</tr>
 										</thead>
 										<tbody>

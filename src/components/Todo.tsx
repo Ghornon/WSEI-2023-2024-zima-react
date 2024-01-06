@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Todo: React.FC<Props> = ({ todo, handleTaskStatusChange, handleTaskDelete }) => {
-	const { users } = useContext(Context);
+	const { users, isAdmin } = useContext(Context);
 
 	return (
 		<tr className="fw-normal">
@@ -25,16 +25,20 @@ const Todo: React.FC<Props> = ({ todo, handleTaskStatusChange, handleTaskDelete 
 					onChange={() => handleTaskStatusChange(todo.id)}
 				/>
 			</td>
-			<td className="align-middle">
-				<a
-					href="#!"
-					data-mdb-toggle="tooltip"
-					title="Remove"
-					onClick={() => handleTaskDelete(todo.id)}
-				>
-					<i className="bi bi-trash todo-action"></i>
-				</a>
-			</td>
+			{isAdmin ? (
+				<td className="align-middle">
+					<a
+						href="#!"
+						data-mdb-toggle="tooltip"
+						title="Remove"
+						onClick={() => handleTaskDelete(todo.id)}
+					>
+						<i className="bi bi-trash todo-action"></i>
+					</a>
+				</td>
+			) : (
+				''
+			)}
 		</tr>
 	);
 };
