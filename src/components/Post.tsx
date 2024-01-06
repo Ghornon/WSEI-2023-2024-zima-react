@@ -12,6 +12,42 @@ const Post: React.FC<Props> = ({ post }) => {
 	const [comments, setComments] = useState([] as CommentType[]);
 	const { postId, userId } = useParams();
 
+	const [formData, setFormData] = useState({
+		name: '',
+		body: '',
+		email: '',
+	});
+
+	const handleCommentChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = (
+		event
+	) => {
+		const { name, value } = event.target;
+		setFormData((prevState) => ({ ...prevState, [name]: value }));
+	};
+
+	const addComment = async () => {
+		const updatedComments = [...comments];
+
+		const newComment = {
+			...formData,
+			postId: postId,
+		};
+
+		const response = await fetch('https://jsonplaceholder.typicode.com/comments', {
+			method: 'POST', // or 'PUT'
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(newComment),
+		});
+
+		const result = await response.json();
+		updatedComments.push(result);
+
+		setComments(updatedComments);
+		localStorage.setItem('comments', JSON.stringify(updatedComments));
+	};
+
 	useEffect(() => {
 		const cache = localStorage.getItem('comments');
 		if (cache === null) {
@@ -19,15 +55,10 @@ const Post: React.FC<Props> = ({ post }) => {
 				.then((response) => response.json())
 				.then((res) => {
 					localStorage.setItem('comments', JSON.stringify(res));
-					const comments = res.filter(
-						(comment: CommentType) => comment.postId == post.id
-					);
-					setComments(comments);
+					setComments(res);
 				});
 		} else {
-			const comments = JSON.parse(cache).filter(
-				(comment: CommentType) => comment.postId == post.id
-			);
+			const comments = JSON.parse(cache);
 			setComments(comments);
 		}
 	}, []);
@@ -69,11 +100,13 @@ const Post: React.FC<Props> = ({ post }) => {
 				</div>
 				<ul className="list-group list-group-flush p-4">
 					{comments.length > 0 ? (
-						comments.map((comment: CommentType, index) => {
-							if (!postId && index >= 1) return;
+						comments
+							.filter((comment: CommentType) => comment.postId == post.id)
+							.map((comment: CommentType, index) => {
+								if (!postId && index >= 1) return;
 
-							return <Comment key={comment.id} comment={comment} />;
-						})
+								return <Comment key={comment.id} comment={comment} />;
+							})
 					) : (
 						<Loader />
 					)}
@@ -82,7 +115,7 @@ const Post: React.FC<Props> = ({ post }) => {
 					<a href={`/users/${post.userId}`} className="card-link btn btn-outline-primary">
 						Author Page
 					</a>
-					{postId || userId ? (
+					{postId ? (
 						<button
 							className="card-link btn btn-outline-secondary"
 							type="button"
@@ -116,11 +149,23 @@ const Post: React.FC<Props> = ({ post }) => {
 						<div className="modal-body">
 							<div className="form-group">
 								<label>Title</label>
-								<input type="text" className="form-control" />
+								<input
+									type="text"
+									className="form-control"
+									name="name"
+									value={formData.name}
+									onChange={handleCommentChange}
+								/>
 							</div>
 							<div className="form-group">
 								<label>Comment</label>
-								<textarea className="form-control" rows={3}></textarea>
+								<textarea
+									className="form-control"
+									rows={3}
+									name="body"
+									value={formData.body}
+									onChange={handleCommentChange}
+								></textarea>
 							</div>
 							<div className="form-group">
 								<label>Email address</label>
@@ -128,6 +173,9 @@ const Post: React.FC<Props> = ({ post }) => {
 									type="email"
 									className="form-control"
 									placeholder="name@example.com"
+									name="email"
+									value={formData.email}
+									onChange={handleCommentChange}
 								/>
 							</div>
 						</div>
@@ -139,7 +187,7 @@ const Post: React.FC<Props> = ({ post }) => {
 							>
 								Close
 							</button>
-							<button type="button" className="btn btn-primary">
+							<button type="button" className="btn btn-primary" onClick={addComment}>
 								Save changes
 							</button>
 						</div>
