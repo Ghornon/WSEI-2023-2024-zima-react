@@ -41,7 +41,7 @@ function PostsPage() {
 				setPosts(JSON.parse(cache));
 			}
 		}
-	}, []);
+	}, [postId]);
 
 	return (
 		<section className="vh-100">

@@ -18,6 +18,7 @@ function PostsFormPage() {
 		HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
 	> = (event) => {
 		const { name, value } = event.target;
+		console.log(name, value);
 		setFormData((prevState) => ({ ...prevState, [name]: value }));
 	};
 	const handleEdit = async () => {
@@ -159,6 +160,7 @@ function PostsFormPage() {
 							<select
 								className="form-select"
 								value={formData.userId}
+								name="userId"
 								onChange={handlePostChange}
 							>
 								{users.length
