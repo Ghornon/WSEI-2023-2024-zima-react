@@ -1,37 +1,36 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { PostType } from '../../types/Post.types';
 import { Context } from '../../Store';
+import { AlbumType } from '../../types/Album.types';
 
-function PostsFormPage() {
-	const [posts, setPosts] = useState([] as PostType[]);
-	const { postId } = useParams();
+function AlbumsFormPage() {
+	const [albums, setAlbums] = useState([] as AlbumType[]);
+	const { albumId } = useParams();
 	const { users } = useContext(Context);
 
 	const [formData, setFormData] = useState({
 		title: '',
-		body: '',
 		userId: '',
 	});
 
-	const handlePostChange: React.ChangeEventHandler<
+	const handleAlbumChange: React.ChangeEventHandler<
 		HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
 	> = (event) => {
 		const { name, value } = event.target;
 		setFormData((prevState) => ({ ...prevState, [name]: value }));
 	};
 	const handleEdit = async () => {
-		const updatedPost = {
+		const updatedAlbum = {
 			...formData,
-			postId: postId,
+			albumId: albumId,
 		};
 
-		const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
+		const response = await fetch(`https://jsonplaceholder.typicode.com/albums/${albumId}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify(updatedPost),
+			body: JSON.stringify(updatedAlbum),
 		});
 
 		const status = await response.ok;
@@ -39,28 +38,28 @@ function PostsFormPage() {
 		if (status) {
 			const result = await response.json();
 
-			const updatedPosts = [...posts].map((post: PostType) => {
-				if (post.id.toString() == postId) return result;
+			const updatedAlbums = [...albums].map((album: AlbumType) => {
+				if (album.id.toString() == albumId) return result;
 
-				return post;
+				return album;
 			});
 
-			localStorage.setItem('posts', JSON.stringify(updatedPosts));
-			window.location.replace(`/posts/${postId}`);
+			localStorage.setItem('albums', JSON.stringify(updatedAlbums));
+			window.location.replace(`/albums/${albumId}`);
 		}
 	};
 
 	const handleAdd = async () => {
-		const newPost = {
+		const newAlbum = {
 			...formData,
 		};
 
-		const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
-			method: 'POST',
+		const response = await fetch('https://jsonplaceholder.typicode.com/albums', {
+			method: 'album',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify(newPost),
+			body: JSON.stringify(newAlbum),
 		});
 
 		const status = await response.ok;
@@ -68,16 +67,16 @@ function PostsFormPage() {
 		if (status) {
 			const result = await response.json();
 
-			const updatedPosts = [...posts];
-			updatedPosts.push(result);
+			const updatedAlbums = [...albums];
+			updatedAlbums.push(result);
 
-			localStorage.setItem('posts', JSON.stringify(updatedPosts));
-			window.location.replace(`/posts/${result.id}`);
+			localStorage.setItem('albums', JSON.stringify(updatedAlbums));
+			window.location.replace(`/albums/${result.id}`);
 		}
 	};
 
 	const handleRemove = async () => {
-		const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
+		const response = await fetch(`https://jsonplaceholder.typicode.com/albums/${albumId}`, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
@@ -87,47 +86,47 @@ function PostsFormPage() {
 		const status = await response.ok;
 
 		if (status) {
-			const updatedPosts = [...posts].filter(
-				(post: PostType) => post.id.toString() != postId
+			const updatedAlbums = [...albums].filter(
+				(album: AlbumType) => album.id.toString() != albumId
 			);
 
-			localStorage.setItem('posts', JSON.stringify(updatedPosts));
-			window.location.replace('/posts');
+			localStorage.setItem('albums', JSON.stringify(updatedAlbums));
+			window.location.replace('/albums');
 		}
 	};
 
 	useEffect(() => {
-		const cache = localStorage.getItem('posts');
+		const cache = localStorage.getItem('albums');
 		if (cache === null) {
-			fetch('https://jsonplaceholder.typicode.com/posts')
+			fetch('https://jsonplaceholder.typicode.com/albums')
 				.then((response) => response.json())
 				.then((res) => {
-					localStorage.setItem('posts', JSON.stringify(res));
-					if (postId) {
-						const post = res.find((post: PostType) => post.id.toString() == postId);
+					localStorage.setItem('albums', JSON.stringify(res));
+					if (albumId) {
+						const album = res.find(
+							(album: AlbumType) => album.id.toString() == albumId
+						);
 
 						setFormData({
-							title: post.title,
-							body: post.body,
-							userId: post.userId,
+							title: album.title,
+							userId: album.userId,
 						});
 					}
-					setPosts(res);
+					setAlbums(res);
 				});
 		} else {
-			if (postId) {
-				const post = JSON.parse(cache).find(
-					(post: PostType) => post.id.toString() == postId
+			if (albumId) {
+				const album = JSON.parse(cache).find(
+					(album: AlbumType) => album.id.toString() == albumId
 				);
 				setFormData({
-					title: post.title,
-					body: post.body,
-					userId: post.userId,
+					title: album.title,
+					userId: album.userId,
 				});
 			}
-			setPosts(JSON.parse(cache));
+			setAlbums(JSON.parse(cache));
 		}
-	}, [postId]);
+	}, [albumId]);
 
 	return (
 		<section className="vh-100">
@@ -141,18 +140,8 @@ function PostsFormPage() {
 								className="form-control"
 								name="title"
 								value={formData.title}
-								onChange={handlePostChange}
+								onChange={handleAlbumChange}
 							/>
-						</div>
-						<div className="form-group">
-							<label>Body</label>
-							<textarea
-								className="form-control"
-								rows={6}
-								name="body"
-								value={formData.body}
-								onChange={handlePostChange}
-							></textarea>
 						</div>
 						<div className="form-group">
 							<label>User</label>
@@ -160,7 +149,7 @@ function PostsFormPage() {
 								className="form-select"
 								value={formData.userId}
 								name="userId"
-								onChange={handlePostChange}
+								onChange={handleAlbumChange}
 							>
 								{users.length
 									? users.map((user) => (
@@ -172,14 +161,14 @@ function PostsFormPage() {
 							</select>
 						</div>
 					</div>
-					{postId ? (
+					{albumId ? (
 						<div className="col">
 							<button
 								type="button"
 								className="btn btn-outline-danger"
 								onClick={handleRemove}
 							>
-								Remove post
+								Remove album
 							</button>
 							<button
 								type="button"
@@ -196,7 +185,7 @@ function PostsFormPage() {
 								className="btn btn-outline-success"
 								onClick={handleAdd}
 							>
-								Add post
+								Add new album
 							</button>
 						</div>
 					)}
@@ -206,4 +195,4 @@ function PostsFormPage() {
 	);
 }
 
-export default PostsFormPage;
+export default AlbumsFormPage;

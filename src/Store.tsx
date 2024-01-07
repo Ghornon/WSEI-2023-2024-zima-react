@@ -34,9 +34,17 @@ const Store = ({ children }: Props) => {
 		const isAdmin = sessionStorage.getItem('isAdmin');
 		if (isAdmin == 'true') setAdmin(true);
 
-		fetch('https://jsonplaceholder.typicode.com/users')
-			.then((response) => response.json())
-			.then((res) => setUsers(res));
+		const cache = localStorage.getItem('users');
+		if (cache === null) {
+			fetch('https://jsonplaceholder.typicode.com/users')
+				.then((response) => response.json())
+				.then((res) => {
+					localStorage.setItem('users', JSON.stringify(res));
+					setUsers(res);
+				});
+		} else {
+			setUsers(JSON.parse(cache));
+		}
 	}, []);
 
 	return (

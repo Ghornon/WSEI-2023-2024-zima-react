@@ -30,7 +30,7 @@ function UserProfile() {
 				if (Array.isArray(res)) setPosts(res);
 				else setPosts([res]);
 			});
-	}, []);
+	}, [PostsURL]);
 
 	useEffect(() => {
 		fetch(AlbumsURL)
@@ -40,7 +40,7 @@ function UserProfile() {
 				if (Array.isArray(res)) setAlbums(res);
 				else setAlbums([res]);
 			});
-	}, []);
+	}, [AlbumsURL]);
 
 	return (
 		<section>
@@ -50,7 +50,7 @@ function UserProfile() {
 						<nav aria-label="breadcrumb" className="bg-light rounded-3 p-3 mb-4">
 							<ol className="breadcrumb mb-0">
 								<li className="breadcrumb-item">
-									<a href="/home">Home</a>
+									<a href="/">Home</a>
 								</li>
 								<li className="breadcrumb-item">
 									<a href="/users/">Users</a>
@@ -84,15 +84,23 @@ function UserProfile() {
 						)}
 
 						<hr />
-						<div className="list-group">
-							{albums.length > 0 ? (
-								albums.map((album: AlbumType) => (
-									<Album key={album.id} album={album} />
-								))
-							) : (
-								<Loader />
-							)}
-						</div>
+						<table className="table mb-0">
+							<thead>
+								<tr>
+									<th scope="col">USer</th>
+									<th scope="col">Title</th>
+								</tr>
+							</thead>
+							<tbody>
+								{albums.length > 0 ? (
+									albums.map((album: AlbumType) => (
+										<Album key={album.id} album={album} />
+									))
+								) : (
+									<Loader />
+								)}
+							</tbody>
+						</table>
 
 						<hr />
 

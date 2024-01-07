@@ -1,10 +1,16 @@
+import { useContext } from 'react';
 import { PhotoType } from '../types/Photo.types';
+import { Context } from '../Store';
+import { useParams } from 'react-router-dom';
 
 interface Props {
 	photo: PhotoType;
 }
 
 const Photo: React.FC<Props> = ({ photo }) => {
+	const { isAdmin } = useContext(Context);
+	const { albumId } = useParams();
+
 	return (
 		<div className="col-md-4">
 			<div className="card mb-4 box-shadow">
@@ -13,9 +19,16 @@ const Photo: React.FC<Props> = ({ photo }) => {
 					<p className="card-text">{photo.title}</p>
 					<div className="d-flex justify-content-between align-items-center">
 						<div className="btn-group">
-							<button type="button" className="btn btn-sm btn-outline-secondary">
-								Edit
-							</button>
+							{isAdmin ? (
+								<a
+									href={`/albums/${albumId}/photos/${photo.id}/edit`}
+									className="card-link btn btn-outline-info"
+								>
+									Edit
+								</a>
+							) : (
+								''
+							)}
 						</div>
 						<small className="text-muted">9 mins</small>
 					</div>
