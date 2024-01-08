@@ -201,7 +201,7 @@ const UserProfileForm = () => {
 			}
 			setUsers(JSON.parse(cache));
 		}
-	}, [userId]);
+	}, [setUsers, userId]);
 
 	return (
 		<section className="vh-100">

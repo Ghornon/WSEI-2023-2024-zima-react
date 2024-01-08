@@ -8,7 +8,7 @@ import UserProfile from './pages/UserProfile/UserProfile';
 import AlbumsPage from './pages/Albums/AlbumsPage';
 import PhotosPage from './pages/Photos/PhotosPage';
 import PostsFormPage from './pages/Posts/PostsForm';
-import AlbumsFormPage from './pages/UserProfile/UserProfileForm';
+import AlbumsFormPage from './pages/Albums/AlbumsForm';
 import PhotosFormPage from './pages/Photos/PhotosForm';
 import UserProfileForm from './pages/UserProfile/UserProfileForm';
 
