@@ -3,6 +3,7 @@ import { UserType } from './types/User.types';
 
 type ContextType = {
 	users: UserType[];
+	setUsers: (users: UserType[]) => void;
 	isAdmin: boolean;
 	handleAdminMode: () => void;
 	/* 	saveTodo: (todo: ITodo) => void;
@@ -48,7 +49,9 @@ const Store = ({ children }: Props) => {
 	}, []);
 
 	return (
-		<Context.Provider value={{ users, isAdmin, handleAdminMode }}>{children}</Context.Provider>
+		<Context.Provider value={{ users, setUsers, isAdmin, handleAdminMode }}>
+			{children}
+		</Context.Provider>
 	);
 };
 

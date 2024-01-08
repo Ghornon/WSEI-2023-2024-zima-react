@@ -114,9 +114,16 @@ const Post: React.FC<Props> = ({ post }) => {
 					)}
 				</ul>
 				<div className="card-footer text-muted">
-					<a href={`/users/${post.userId}`} className="card-link btn btn-outline-primary">
-						Author Page
-					</a>
+					{userId ? (
+						''
+					) : (
+						<a
+							href={`/users/${post.userId}`}
+							className="card-link btn btn-outline-primary"
+						>
+							Author Page
+						</a>
+					)}
 					{postId ? (
 						<button
 							className="card-link btn btn-outline-secondary"

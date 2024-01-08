@@ -179,7 +179,7 @@ function PhotosFormPage() {
 							</button>
 							<button
 								type="button"
-								className="btn btn-outline-primary"
+								className="btn btn-outline-primary ms-1"
 								onClick={handleEdit}
 							>
 								Save changes

@@ -8,8 +8,9 @@ import UserProfile from './pages/UserProfile/UserProfile';
 import AlbumsPage from './pages/Albums/AlbumsPage';
 import PhotosPage from './pages/Photos/PhotosPage';
 import PostsFormPage from './pages/Posts/PostsForm';
-import AlbumsFormPage from './pages/Albums/AlbumsForm';
+import AlbumsFormPage from './pages/UserProfile/UserProfileForm';
 import PhotosFormPage from './pages/Photos/PhotosForm';
+import UserProfileForm from './pages/UserProfile/UserProfileForm';
 
 function App() {
 	return (
@@ -19,14 +20,16 @@ function App() {
 				<Routes>
 					<Route path="/">
 						<Route index element={<PostsPage />} />
-						<Route path="todos" element={<TodoPage />} />
-						<Route path="users" element={<UsersPage />} />
+						<Route path="/todos" element={<TodoPage />} />
+						<Route path="/users" element={<UsersPage />} />
+						<Route path="/users/new" element={<UserProfileForm />} />
 						<Route path="/users/:userId" element={<UserProfile />} />
+						<Route path="/users/:userId/edit" element={<UserProfileForm />} />
 						<Route path="posts" element={<PostsPage />} />
 						<Route path="/posts/:postId" element={<PostsPage />} />
 						<Route path="/posts/:postId/edit" element={<PostsFormPage />} />
 						<Route path="/posts/new" element={<PostsFormPage />} />
-						<Route path="albums" element={<AlbumsPage />} />
+						<Route path="/albums" element={<AlbumsPage />} />
 						<Route path="/albums/new" element={<AlbumsFormPage />} />
 						<Route path="/albums/:albumId" element={<AlbumsPage />} />
 						<Route path="/albums/:albumId/edit" element={<AlbumsFormPage />} />

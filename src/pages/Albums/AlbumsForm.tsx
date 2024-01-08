@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Context } from '../../Store';
 import { AlbumType } from '../../types/Album.types';
 
-function AlbumsFormPage() {
+const AlbumsForm = () => {
 	const [albums, setAlbums] = useState([] as AlbumType[]);
 	const { albumId } = useParams();
 	const { users } = useContext(Context);
@@ -172,7 +172,7 @@ function AlbumsFormPage() {
 							</button>
 							<button
 								type="button"
-								className="btn btn-outline-primary"
+								className="btn btn-outline-primary ms-1"
 								onClick={handleEdit}
 							>
 								Save changes
@@ -193,6 +193,6 @@ function AlbumsFormPage() {
 			</div>
 		</section>
 	);
-}
+};
 
-export default AlbumsFormPage;
+export default AlbumsForm;

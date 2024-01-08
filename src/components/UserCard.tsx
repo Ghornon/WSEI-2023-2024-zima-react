@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { UserType } from '../types/User.types';
+import { useParams } from 'react-router-dom';
+import { Context } from '../Store';
 
 interface Props {
 	user: UserType;
 }
 
 export const UserCard: React.FC<Props> = ({ user }) => {
+	const { userId } = useParams();
+	const { isAdmin } = useContext(Context);
 	return (
 		<div className="card mb-4">
 			<div className="card-body text-center">
@@ -18,12 +22,23 @@ export const UserCard: React.FC<Props> = ({ user }) => {
 				<p className="text-muted mb-1">{user.company.bs}</p>
 				<p className="text-muted mb-4">{user.company.name}</p>
 				<div className="d-flex justify-content-center mb-2">
-					<a href={`/users/${user.id}`} className="btn btn-primary">
-						Show profile
-					</a>
+					{userId ? (
+						''
+					) : (
+						<a href={`/users/${user.id}`} className="btn btn-primary">
+							Show profile
+						</a>
+					)}
 					<a href={`mailto:${user.email}`} className="btn btn-outline-primary ms-1">
 						Message
 					</a>
+					{isAdmin ? (
+						<a href={`/users/${user.id}/edit`} className="btn btn-outline-info ms-1">
+							Edit
+						</a>
+					) : (
+						''
+					)}
 				</div>
 			</div>
 		</div>
