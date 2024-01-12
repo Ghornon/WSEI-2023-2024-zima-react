@@ -1,46 +1,85 @@
-# Getting Started with Create React App
+# WSEI-2023-2024-zima-react
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+App built using ReactJS, seamlessly connects with the widely-used JSONPlaceholder API (https://jsonplaceholder.typicode.com/). Leveraging the various available endpoints, our application offers a dynamic and interactive user experience. From fetching and displaying user profiles to managing posts, comments, and todos, users can explore and interact with the extensive features provided by the JSONPlaceholder API. With a clean and responsive user interface,y ReactJS app ensures a smooth and engaging experience for users, making it easy to leverage the power of JSONPlaceholder for a variety of web development projects.
 
-## Available Scripts
+# Final project
 
-In the project directory, you can run:
+Final project of front-end programming using React
 
-### `npm start`
+## Subject
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Z/23 N lab2/3/PROG Frameworki front-endowe
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Features
 
-### `npm test`
+The application provides the following features:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### User Profiles
 
-### `npm run build`
+-   Fetch and display user profiles from the JSONPlaceholder API, providing comprehensive information about each user.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Posts Management
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-   Browse and read posts from different users.
+-   Create new posts, allowing users to share their thoughts and updates.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Comments Section
 
-### `npm run eject`
+-   View comments on each post, providing a collaborative platform for discussions.
+-   Add and delete comments to engage with the community.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Todos List
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-   Manage todos, displaying a list of tasks for users to track and complete.
+-   Mark todos as completed or delete them as needed.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Albums and Photos
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+-   Explore user albums and view associated photos.
+-   Enjoy a visually engaging experience with image thumbnails and full-sized photo views.
 
-## Learn More
+### Responsive Design
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-   Ensure a seamless user experience on various devices with a responsive and user-friendly design.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### API Integration
+
+-   Utilize the JSONPlaceholder API to seamlessly retrieve and update data, ensuring real-time information and interaction.
+
+### Search and Filter
+
+-   Search for specific users, posts, or todos.
+-   Apply filters to refine content based on user preferences.
+
+## Technologies Used
+
+The application is developed using the following technologies:
+
+-   TypeScript
+-   React
+-   Bootstrap
+-   Vite
+
+## Installation
+
+To install and run the application, follow these steps:
+
+1. Clone the repository to your local machine.
+2. Open the solution
+3. Run **npm i** command
+4. Run **npm run dev**
+5. Open app in browse
+
+## Build
+
+1. Clone the repository to your local machine.
+2. Run **npm i** command
+3. Run **npm run build**
+
+## Contributing
+
+Feel free to contribute to this project.
+
+## License
+
+This project is licensed under the GNU Affero General Public License v3.0. See the LICENSE file for details.
